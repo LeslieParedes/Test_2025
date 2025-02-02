@@ -1,0 +1,11 @@
+---
+title: "Homework_3"
+output: html_document
+date: "2025-02-02"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1.Removing the spaces in the next lines:
