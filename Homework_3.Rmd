@@ -8,4 +8,62 @@ date: "2025-02-02"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## 1.Removing the spaces in the next lines:
+## Regular Expressions
+
+### 1.
+```
+Find: [ \t]{2,} Removing spaces and replacing them with commas
+Replace: ,
+```
+### 2.
+```
+Find:(\w+), (\w+), (.*) captures the last name, first name, and affiliation.
+Replace: $2 $1 \($3\) adding parentheses
+```
+
+### 3.
+```
+Find: ^\s*(\d{4} .+?\.mp3)\s* captures any leading space and the numbers, then matches any trailing spaces
+Replace: $1\n replaces the matched text with the captured group followed by a newline character, removing any leading spaces.
+```
+
+### 4.
+```
+Find: ^\s*(\d{4})\s(.+?)(\.mp3) captures the leading digit, and .mp3
+Replace:$2_$1$3 rearranges the captured groups into the format
+```
+
+### 5.
+```
+Find:(\w)\w+?,(\w+),[\d\.]+,(\d+) captures the first letter of the genus, species name, numerical value 
+Replace:$1_$2,$3 rearranges genus initial, species name, and last number
+```
+
+### 6.
+```
+Find:(\w)\w+?,(\w{4})\w+?,[\d\.]+,(\d+) captures the first four letters of the species name.
+Replace:$1_$2,$3
+```
+
+### 7.
+```
+Find: ^(\w{3})\w*,(\w{3})\w*,([\d\.]+),(\d+)$ captures the first three letters of the genus and species name, and numerical value
+Replace: $1$2, $4, $3 first three letters of genus and species names and then the numbers
+```
+
+### 8.From the .cvs file
+```
+Changing the NA for 0 to get a binary column 
+Find: ,NA,
+Replace: ,0,
+
+Removing all the extra characters
+
+Find: [^\w\s,] matches any character that is not a word character, space, or a comma
+Replace: with nothing 
+
+There are some spaces after some words in 
+
+Find: ,(\w+)\s+, matches a word followed by one or more space characters and a comma.
+Replace:,$1, remove the spaces and keep the word and commas
+```
