@@ -73,7 +73,7 @@ Replace: with nothing
 ```
 Matches any character that is not a word character, space, or a comma
 
-There are some spaces after some words in 
+There are some spaces after some words 
 ```
 Find: ,(\w+)\s+, 
 Replace:,$1, 
