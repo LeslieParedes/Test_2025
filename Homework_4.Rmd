@@ -1,0 +1,84 @@
+---
+title: "HW4"
+output: html_document
+date: "2025-02-05"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#### 1. Assigning each expression to the value of the variable z and print the value stored in z
+```{r, eval=TRUE,echo=TRUE}
+x <-1.1
+a <- 2.2
+b <- 3.3
+
+# a 
+z <-x^(a^b) 
+print(z)
+
+#b
+z<- (x^a)^b
+print(z) 
+
+#c
+z<-(3*x^3)+(2*x^2)+1
+print(z)
+```
+#### 2.
+
+```{r, eval=TRUE,echo=TRUE}
+my_vectorA <- c(seq(1, 8, by = 1), seq(7, 1, by = -1))
+print(my_vectorA)
+my_vectorB<- rep(1:5, 1:5)
+print(my_vectorB)
+my_vectorC<- rep(5:1, 5:1)
+print(my_vectorC)
+```
+
+#### 3.
+```{r, eval=TRUE,echo=TRUE}
+set.seed(1)
+coor <- runif(2)
+print(coor)
+
+x <- coor[1]
+print(x)
+y <- coor[2]
+print(y)
+#calculating the radius 
+radius <- sqrt(x^2 + y^2)
+print(radius)
+#calculating the theta with atan() function
+theta <- atan(y / x)
+print(theta)
+
+```
+
+#### 4.
+```{r, eval=TRUE,echo=TRUE}
+queue <- c("sheep", "fox", "owl", "ant")
+print(queue)
+queue<-c(queue,"serpent") #the serpent arrives and gets in line
+print(queue)
+queue <- queue[-which(queue == "sheep")]
+print(queue)
+queue<-c("donkey", queue)
+print(queue)
+queue <- queue[-which(queue == "serpent")]
+print(queue)
+queue <- queue[-which(queue == "owl")]
+print(queue)
+which(queue == "ant")
+queue <- c(queue[1:(3-1)], "aphid", queue[3:length(queue)])
+print(queue)
+which(queue == "aphid")
+```
+
+#### 5.
+```{r, eval=TRUE,echo=TRUE}
+X <-1:100
+Xfiltered <- X[!(X %% 2 == 0 | X %% 3 == 0 | X %% 7 == 0)]
+print(Xfiltered)
+```
