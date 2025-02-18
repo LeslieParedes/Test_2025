@@ -519,19 +519,20 @@ class="section level5">
 <h5>For the first variable, use a single line of code in R to select 4
 random rows and replace the numerical values in those rows with NA</h5>
 <pre class="r"><code>my_data_frame$my_unis[sample(1:26, 4)] &lt;- NA</code></pre>
+</div>
 <div
 id="for-the-first-variable-write-a-single-line-of-r-code-to-identify-which-rows-have-the-missing-values."
-class="section level6">
-<h6>For the first variable, write a single line of R code to identify
-which rows have the missing values.</h6>
+class="section level5">
+<h5>For the first variable, write a single line of R code to identify
+which rows have the missing values.</h5>
 <pre class="r"><code>which(is.na(my_data_frame$my_unis))</code></pre>
 <pre><code>## [1]  4  7 20 24</code></pre>
 </div>
 <div
 id="re-order-the-entire-data-frame-to-arrange-the-second-variable-in-alphabetical-order"
-class="section level6">
-<h6>Re-order the entire data frame to arrange the second variable in
-alphabetical order</h6>
+class="section level5">
+<h5>Re-order the entire data frame to arrange the second variable in
+alphabetical order</h5>
 <pre class="r"><code>my_data_frame &lt;- my_data_frame[order(my_data_frame$Letter), ]
 print(my_data_frame)</code></pre>
 <pre><code>##     my_unis Letter
@@ -563,12 +564,11 @@ print(my_data_frame)</code></pre>
 ## 12 4.150476      z</code></pre>
 </div>
 <div id="calculate-the-column-mean-for-the-first-variable."
-class="section level6">
-<h6>Calculate the column mean for the first variable.</h6>
+class="section level5">
+<h5>Calculate the column mean for the first variable.</h5>
 <pre class="r"><code>mean_my_unis &lt;- mean(my_data_frame$my_unis, na.rm = TRUE)
 print(mean_my_unis)</code></pre>
 <pre><code>## [1] 4.994336</code></pre>
-</div>
 </div>
 </div>
 
