@@ -1,0 +1,29 @@
+---
+title: "HW6"
+output: html_document
+date: "2025-02-19"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+### Creating Fake Data Sets To Explore Hypotheses
+#### 1. 
+```{r, eval=TRUE,echo=TRUE}
+Noise_oc<-round(runif(100, min = 5, max = 50),0)
+Behavior<-rep(c("Feeding","Resting","Social", "Traveling"), each=1)
+Calm_oc<-round(runif(100, min = 1, max = 20), 0)
+d_frame<-data.frame(Behavior,Calm_oc,Noise_oc) #each variable have the same length
+print(d_frame)
+str(d_frame) 
+summary(d_frame)
+fit_linear <- function(x=Noise_oc,y=Calm_oc) {
+    my_mod <- lm(y~x) 
+    my_out <- c(slope=summary(my_mod)$coefficients[2,1],
+               p_value=summary(my_mod)$coefficients[2,4])
+   plot(x=x,y=y) 
+   return(my_out)
+ }
+fit_linear()
+
+```

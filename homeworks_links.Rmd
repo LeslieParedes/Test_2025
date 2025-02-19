@@ -19,3 +19,9 @@ Week 4 Homework 4 [Atomic Vectors 1](Homework_4.html)
 
 Week 5 Homework 5 [Matrices, lists, and data frames](HW5.html)
 
+
+Homework 6  [Fake data set](HW6.html)
+
+
+
+
