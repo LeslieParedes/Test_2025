@@ -23,5 +23,8 @@ Week 5 Homework 5 [Matrices, lists, and data frames](HW5.html)
 Homework 6  [Fake data set](HW6.html)
 
 
+Homework 7  [dplyr package](HW7.html) 
+
+
 
 

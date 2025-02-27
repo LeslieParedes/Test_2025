@@ -10,9 +10,9 @@
 
 
 
-<meta name="date" content="2025-01-22" />
+<meta name="date" content="2025-02-19" />
 
-<title>homeworks_links</title>
+<title>HW6</title>
 
 <script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -264,20 +264,149 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">homeworks_links</h1>
-<h4 class="date">2025-01-22</h4>
+<h1 class="title toc-ignore">HW6</h1>
+<h4 class="date">2025-02-19</h4>
 
 </div>
 
 
-<p>Week 1 Homework <a href="HW1.html">HW1 Link</a></p>
-<p>week 3 Homework 3 <a href="Homework_3.html">Regular
-expressions</a></p>
-<p>Week 4 Homework 4 <a href="Homework_4.html">Atomic Vectors 1</a></p>
-<p>Week 5 Homework 5 <a href="HW5.html">Matrices, lists, and data
-frames</a></p>
-<p>Homework 6 <a href="HW6.html">Fake data set</a></p>
-<p>Homework 7 <a href="HW7.html">dplyr package</a></p>
+<div id="creating-fake-data-sets-to-explore-hypotheses"
+class="section level3">
+<h3>Creating Fake Data Sets To Explore Hypotheses</h3>
+<div id="section" class="section level4">
+<h4>1.</h4>
+<pre class="r"><code>Noise_oc&lt;-round(runif(100, min = 5, max = 50),0)
+Behavior&lt;-rep(c(&quot;Feeding&quot;,&quot;Resting&quot;,&quot;Social&quot;, &quot;Traveling&quot;), each=1)
+Calm_oc&lt;-round(runif(100, min = 1, max = 20), 0)
+d_frame&lt;-data.frame(Behavior,Calm_oc,Noise_oc) #each variable have the same length
+print(d_frame)</code></pre>
+<pre><code>##      Behavior Calm_oc Noise_oc
+## 1     Feeding       7       10
+## 2     Resting       8        7
+## 3      Social       4       47
+## 4   Traveling      14       35
+## 5     Feeding       5        9
+## 6     Resting      19       27
+## 7      Social      18       26
+## 8   Traveling      19       22
+## 9     Feeding      15       50
+## 10    Resting       8       13
+## 11     Social      16       42
+## 12  Traveling       1        8
+## 13    Feeding      19       23
+## 14    Resting      20       11
+## 15     Social       8       14
+## 16  Traveling      15       43
+## 17    Feeding      16       37
+## 18    Resting      14       17
+## 19     Social      10       27
+## 20  Traveling      10        9
+## 21    Feeding       7       21
+## 22    Resting      14       49
+## 23     Social      17       33
+## 24  Traveling       9       35
+## 25    Feeding      11       19
+## 26    Resting      14       23
+## 27     Social       4       50
+## 28  Traveling       8       43
+## 29    Feeding       9       48
+## 30    Resting       3       42
+## 31     Social      19       40
+## 32  Traveling      17       17
+## 33    Feeding      18       39
+## 34    Resting      19       49
+## 35     Social       2       18
+## 36  Traveling       8       23
+## 37    Feeding      11       42
+## 38    Resting       3        8
+## 39     Social      16       21
+## 40  Traveling      15       25
+## 41    Feeding       2       12
+## 42    Resting      10       31
+## 43     Social      18       49
+## 44  Traveling       2       50
+## 45    Feeding       7       13
+## 46    Resting      11       29
+## 47     Social      13       22
+## 48  Traveling       6       35
+## 49    Feeding       9       17
+## 50    Resting       8       26
+## 51     Social      19       13
+## 52  Traveling       3       22
+## 53    Feeding       2       38
+## 54    Resting      19       27
+## 55     Social       9        8
+## 56  Traveling       8       40
+## 57    Feeding       4       24
+## 58    Resting       2       49
+## 59     Social      13       18
+## 60  Traveling      12       43
+## 61    Feeding      20        9
+## 62    Resting      12       45
+## 63     Social       2       26
+## 64  Traveling       4       10
+## 65    Feeding      10       20
+## 66    Resting       1       43
+## 67     Social       9       17
+## 68  Traveling       6       31
+## 69    Feeding      19       43
+## 70    Resting      15        8
+## 71     Social       4       37
+## 72  Traveling      10       36
+## 73    Feeding      14       26
+## 74    Resting      10       25
+## 75     Social      19       30
+## 76  Traveling      15       47
+## 77    Feeding       9       15
+## 78    Resting       3       15
+## 79     Social       6       24
+## 80  Traveling      17       20
+## 81    Feeding       9       44
+## 82    Resting      10       13
+## 83     Social      14       27
+## 84  Traveling      15       24
+## 85    Feeding       4       30
+## 86    Resting      17       35
+## 87     Social      19       49
+## 88  Traveling      12       15
+## 89    Feeding      11       16
+## 90    Resting       5       41
+## 91     Social       1       42
+## 92  Traveling      18       10
+## 93    Feeding       4       48
+## 94    Resting       1       12
+## 95     Social      19       11
+## 96  Traveling       7       47
+## 97    Feeding       4       28
+## 98    Resting       9       12
+## 99     Social      10       21
+## 100 Traveling       9       35</code></pre>
+<pre class="r"><code>str(d_frame) </code></pre>
+<pre><code>## &#39;data.frame&#39;:    100 obs. of  3 variables:
+##  $ Behavior: chr  &quot;Feeding&quot; &quot;Resting&quot; &quot;Social&quot; &quot;Traveling&quot; ...
+##  $ Calm_oc : num  7 8 4 14 5 19 18 19 15 8 ...
+##  $ Noise_oc: num  10 7 47 35 9 27 26 22 50 13 ...</code></pre>
+<pre class="r"><code>summary(d_frame)</code></pre>
+<pre><code>##    Behavior            Calm_oc        Noise_oc    
+##  Length:100         Min.   : 1.0   Min.   : 7.00  
+##  Class :character   1st Qu.: 6.0   1st Qu.:16.75  
+##  Mode  :character   Median :10.0   Median :26.00  
+##                     Mean   :10.5   Mean   :27.75  
+##                     3rd Qu.:15.0   3rd Qu.:40.25  
+##                     Max.   :20.0   Max.   :50.00</code></pre>
+<pre class="r"><code>fit_linear &lt;- function(x=Noise_oc,y=Calm_oc) {
+    my_mod &lt;- lm(y~x) 
+    my_out &lt;- c(slope=summary(my_mod)$coefficients[2,1],
+               p_value=summary(my_mod)$coefficients[2,4])
+   plot(x=x,y=y) 
+   return(my_out)
+ }
+fit_linear()</code></pre>
+<p><img src="HW6_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<pre><code>##       slope     p_value 
+## 0.004664509 0.914680110</code></pre>
+</div>
+</div>
 
 
 
