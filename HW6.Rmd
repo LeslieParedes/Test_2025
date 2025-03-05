@@ -8,22 +8,78 @@ date: "2025-02-19"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 ### Creating Fake Data Sets To Explore Hypotheses
-#### 1. 
+#### I'm creating a fake data set on the effects of dolphin watching activities on dolphin behaviour. This can be done by quantifying the occurrence of avoidance responses, one of which is a change in the dolphin's swimming direction. In this homework I will test the occurrence of directional changes in two conditions: no tourist boats present (control) and with tourist boats present. Based on this, I hypothesise that dolphins will show greater directional changes in the presence of tourist boats.
 ```{r, eval=TRUE,echo=TRUE}
-Noise_oc<-round(runif(100, min = 5, max = 50),0)
-Behavior<-rep(c("Feeding","Resting","Social", "Traveling"), each=1)
-Calm_oc<-round(runif(100, min = 1, max = 20), 0)
-d_frame<-data.frame(Behavior,Calm_oc,Noise_oc) #each variable have the same length
-print(d_frame)
-str(d_frame) 
-summary(d_frame)
-fit_linear <- function(x=Noise_oc,y=Calm_oc) {
-    my_mod <- lm(y~x) 
-    my_out <- c(slope=summary(my_mod)$coefficients[2,1],
-               p_value=summary(my_mod)$coefficients[2,4])
-   plot(x=x,y=y) 
-   return(my_out)
- }
-fit_linear()
+# Specify parameters
+n_no_boats <- 50  # Sample size for the group without boats
+mean_no_boats <- 9  # Mean of occurrences of directional changes in the group without boats
+var_no_boats <- 15   # variance for the group without boats
 
+n_boats <- 50  # Sample size for the group with boats
+mean_boats <- 20  # Mean of occurrences of directional changes in the group with boats
+var_boats <- 15  # variance for the group with boats
+
+# Generate random data
+No_boats <- round(rnorm(n_no_boats, mean = mean_no_boats, sd = sqrt(var_no_boats)),0)
+boats <- round(rnorm(n_boats, mean = mean_boats, sd = sqrt(var_boats)),0)
+
+# Combine data into a data frame
+data <- data.frame(
+  Directional_changes = c(No_boats, boats),
+  Group = rep(c("No_boats", "boats"), each = n_no_boats)
+)
+head(data)
+str(data)
+```
+#### Analyzing the data
+```{r, eval=TRUE,echo=TRUE}
+library(ggplot2)
+#ANOVA analysis
+anova_result <- aov(Directional_changes ~ Group, data = data)
+summary(anova_result)
+
+# Generate a boxplot to visualize the data
+library(ggplot2)
+
+ggplot(data, aes(x = Group, y = Directional_changes, fill = Group)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(
+    x = "Group",
+    y = "Value"
+  ) 
+```
+#### Using a for loops to adjust the parameters and explore how they might impact the results/analysis.How small can your sample size be before you detect a significant pattern (p < 0.05)? How small can the differences between the groups be (the “effect size”) for you to still detect a significant pattern?
+```{r, eval=TRUE,echo=TRUE}
+#variables to explore
+effect_sizes <- seq(1, 10, 0.5)  # Varying effect sizes
+sample_sizes <- seq(5, 50, 5) # Varying sample sizes
+alpha <- 0.05
+
+# 
+sample_size_results <- data.frame()
+
+for (effect in effect_sizes) {
+  for (n in sample_sizes) {
+    # Generate data
+    group_boats <- rnorm(n, mean = mean_boats, sd = sqrt(var_boats))
+    group_no_boats <- rnorm(n, mean = mean_no_boats + effect, sd = sqrt(var_no_boats))
+    
+    # Perform t-test
+    t_test <- t.test(group_boats, group_no_boats)
+    p_value <- t_test$p.value
+    
+    # Store results
+    sample_size_results <- rbind(results, 
+                     data.frame(Effect_Size = effect, 
+                                Sample_Size = n, 
+                                P_Value = p_value, 
+                                Significant = (p_value < alpha)))
+  }
+}
+
+# View the first few rows of results
+head(sample_size_results)
+# 
+sample_size_results%>% filter(Significant == TRUE & Sample_Size <= 10)
 ```

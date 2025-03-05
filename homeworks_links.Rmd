@@ -8,16 +8,16 @@ date: "2025-01-22"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Week 1 Homework [HW1 Link](HW1.html)
+Homework [HW1 Link](HW1.html)
 
 
-week 3 Homework 3 [Regular expressions](Homework_3.html) 
+Homework 3 [Regular expressions](Homework_3.html) 
 
 
-Week 4 Homework 4 [Atomic Vectors 1](Homework_4.html) 
+Homework 4 [Atomic Vectors 1](Homework_4.html) 
 
 
-Week 5 Homework 5 [Matrices, lists, and data frames](HW5.html)
+Homework 5 [Matrices, lists, and data frames](HW5.html)
 
 
 Homework 6  [Fake data set](HW6.html)
