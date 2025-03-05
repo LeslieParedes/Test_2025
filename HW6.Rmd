@@ -49,7 +49,7 @@ ggplot(data, aes(x = Group, y = Directional_changes, fill = Group)) +
     y = "Number of directional changes"
   ) 
 ```
-#### Using a for loops to adjust the parameters and explore how they might impact the results/analysis.How small can your sample size be before you detect a significant pattern (p < 0.05)? How small can the differences between the groups be (the “effect size”) for you to still detect a significant pattern?
+##### Using a for loops to adjust the parameters and explore how they might impact the results/analysis.How small can your sample size be before you detect a significant pattern (p < 0.05)? How small can the differences between the groups be (the “effect size”) for you to still detect a significant pattern?
 ```{r, eval=TRUE,echo=TRUE}
 library(dplyr)
 #variables to explore
