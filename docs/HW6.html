@@ -271,140 +271,136 @@ $(document).ready(function () {
 
 
 <div id="creating-fake-data-sets-to-explore-hypotheses"
-class="section level3">
-<h3>Creating Fake Data Sets To Explore Hypotheses</h3>
-<div id="section" class="section level4">
-<h4>1.</h4>
-<pre class="r"><code>Noise_oc&lt;-round(runif(100, min = 5, max = 50),0)
-Behavior&lt;-rep(c(&quot;Feeding&quot;,&quot;Resting&quot;,&quot;Social&quot;, &quot;Traveling&quot;), each=1)
-Calm_oc&lt;-round(runif(100, min = 1, max = 20), 0)
-d_frame&lt;-data.frame(Behavior,Calm_oc,Noise_oc) #each variable have the same length
-print(d_frame)</code></pre>
-<pre><code>##      Behavior Calm_oc Noise_oc
-## 1     Feeding       7       10
-## 2     Resting       8        7
-## 3      Social       4       47
-## 4   Traveling      14       35
-## 5     Feeding       5        9
-## 6     Resting      19       27
-## 7      Social      18       26
-## 8   Traveling      19       22
-## 9     Feeding      15       50
-## 10    Resting       8       13
-## 11     Social      16       42
-## 12  Traveling       1        8
-## 13    Feeding      19       23
-## 14    Resting      20       11
-## 15     Social       8       14
-## 16  Traveling      15       43
-## 17    Feeding      16       37
-## 18    Resting      14       17
-## 19     Social      10       27
-## 20  Traveling      10        9
-## 21    Feeding       7       21
-## 22    Resting      14       49
-## 23     Social      17       33
-## 24  Traveling       9       35
-## 25    Feeding      11       19
-## 26    Resting      14       23
-## 27     Social       4       50
-## 28  Traveling       8       43
-## 29    Feeding       9       48
-## 30    Resting       3       42
-## 31     Social      19       40
-## 32  Traveling      17       17
-## 33    Feeding      18       39
-## 34    Resting      19       49
-## 35     Social       2       18
-## 36  Traveling       8       23
-## 37    Feeding      11       42
-## 38    Resting       3        8
-## 39     Social      16       21
-## 40  Traveling      15       25
-## 41    Feeding       2       12
-## 42    Resting      10       31
-## 43     Social      18       49
-## 44  Traveling       2       50
-## 45    Feeding       7       13
-## 46    Resting      11       29
-## 47     Social      13       22
-## 48  Traveling       6       35
-## 49    Feeding       9       17
-## 50    Resting       8       26
-## 51     Social      19       13
-## 52  Traveling       3       22
-## 53    Feeding       2       38
-## 54    Resting      19       27
-## 55     Social       9        8
-## 56  Traveling       8       40
-## 57    Feeding       4       24
-## 58    Resting       2       49
-## 59     Social      13       18
-## 60  Traveling      12       43
-## 61    Feeding      20        9
-## 62    Resting      12       45
-## 63     Social       2       26
-## 64  Traveling       4       10
-## 65    Feeding      10       20
-## 66    Resting       1       43
-## 67     Social       9       17
-## 68  Traveling       6       31
-## 69    Feeding      19       43
-## 70    Resting      15        8
-## 71     Social       4       37
-## 72  Traveling      10       36
-## 73    Feeding      14       26
-## 74    Resting      10       25
-## 75     Social      19       30
-## 76  Traveling      15       47
-## 77    Feeding       9       15
-## 78    Resting       3       15
-## 79     Social       6       24
-## 80  Traveling      17       20
-## 81    Feeding       9       44
-## 82    Resting      10       13
-## 83     Social      14       27
-## 84  Traveling      15       24
-## 85    Feeding       4       30
-## 86    Resting      17       35
-## 87     Social      19       49
-## 88  Traveling      12       15
-## 89    Feeding      11       16
-## 90    Resting       5       41
-## 91     Social       1       42
-## 92  Traveling      18       10
-## 93    Feeding       4       48
-## 94    Resting       1       12
-## 95     Social      19       11
-## 96  Traveling       7       47
-## 97    Feeding       4       28
-## 98    Resting       9       12
-## 99     Social      10       21
-## 100 Traveling       9       35</code></pre>
-<pre class="r"><code>str(d_frame) </code></pre>
-<pre><code>## &#39;data.frame&#39;:    100 obs. of  3 variables:
-##  $ Behavior: chr  &quot;Feeding&quot; &quot;Resting&quot; &quot;Social&quot; &quot;Traveling&quot; ...
-##  $ Calm_oc : num  7 8 4 14 5 19 18 19 15 8 ...
-##  $ Noise_oc: num  10 7 47 35 9 27 26 22 50 13 ...</code></pre>
-<pre class="r"><code>summary(d_frame)</code></pre>
-<pre><code>##    Behavior            Calm_oc        Noise_oc    
-##  Length:100         Min.   : 1.0   Min.   : 7.00  
-##  Class :character   1st Qu.: 6.0   1st Qu.:16.75  
-##  Mode  :character   Median :10.0   Median :26.00  
-##                     Mean   :10.5   Mean   :27.75  
-##                     3rd Qu.:15.0   3rd Qu.:40.25  
-##                     Max.   :20.0   Max.   :50.00</code></pre>
-<pre class="r"><code>fit_linear &lt;- function(x=Noise_oc,y=Calm_oc) {
-    my_mod &lt;- lm(y~x) 
-    my_out &lt;- c(slope=summary(my_mod)$coefficients[2,1],
-               p_value=summary(my_mod)$coefficients[2,4])
-   plot(x=x,y=y) 
-   return(my_out)
- }
-fit_linear()</code></pre>
-<p><img src="HW6_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<pre><code>##       slope     p_value 
-## 0.004664509 0.914680110</code></pre>
+class="section level4">
+<h4>Creating Fake Data Sets To Explore Hypotheses</h4>
+<div
+id="im-creating-a-fake-data-set-on-the-effects-of-dolphin-watching-activities-on-dolphin-behaviour.-this-can-be-done-by-quantifying-the-occurrence-of-avoidance-responses-one-of-which-is-a-change-in-the-dolphins-swimming-direction.-in-this-homework-i-will-test-the-occurrence-of-directional-changes-in-two-conditions-no-tourist-boats-present-control-and-with-tourist-boats-present.-based-on-this-i-hypothesise-that-dolphins-will-show-a-greater-number-of-directional-changes-in-the-presence-of-tourist-boats."
+class="section level5">
+<h5>I’m creating a fake data set on the effects of dolphin watching
+activities on dolphin behaviour. This can be done by quantifying the
+occurrence of avoidance responses, one of which is a change in the
+dolphin’s swimming direction. In this homework I will test the
+occurrence of directional changes in two conditions: no tourist boats
+present (control) and with tourist boats present. Based on this, I
+hypothesise that dolphins will show a greater number of directional
+changes in the presence of tourist boats.</h5>
+<pre class="r"><code># Specify parameters
+n_no_boats &lt;- 50  # Sample size for the group without boats (number of dolphins)
+mean_no_boats &lt;- 9  # Mean of occurrences of directional changes in the group without boats
+var_no_boats &lt;- 10   # variance for the group without boats
+
+n_boats &lt;- 50  # Sample size for the group with boats
+mean_boats &lt;- 20  # Mean of occurrences of directional changes in the group with boats
+var_boats &lt;- 15  # variance for the group with boats
+
+# Generate random data
+No_boats &lt;- round(rnorm(n_no_boats, mean = mean_no_boats, sd = sqrt(var_no_boats)),0)
+boats &lt;- round(rnorm(n_boats, mean = mean_boats, sd = sqrt(var_boats)),0)
+
+# Combine data into a data frame
+data &lt;- data.frame(
+  Directional_changes = c(No_boats, boats),
+  Group = rep(c(&quot;No_boats&quot;, &quot;boats&quot;), each = n_no_boats)
+)
+head(data)</code></pre>
+<pre><code>##   Directional_changes    Group
+## 1                   5 No_boats
+## 2                  14 No_boats
+## 3                   5 No_boats
+## 4                   9 No_boats
+## 5                  16 No_boats
+## 6                  12 No_boats</code></pre>
+<pre class="r"><code>str(data)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    100 obs. of  2 variables:
+##  $ Directional_changes: num  5 14 5 9 16 12 8 6 11 9 ...
+##  $ Group              : chr  &quot;No_boats&quot; &quot;No_boats&quot; &quot;No_boats&quot; &quot;No_boats&quot; ...</code></pre>
+</div>
+<div id="analyzing-the-data" class="section level5">
+<h5>Analyzing the data</h5>
+<pre class="r"><code>library(ggplot2)
+#ANOVA analysis
+anova_result &lt;- aov(Directional_changes ~ Group, data = data)
+summary(anova_result)</code></pre>
+<pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)    
+## Group        1   2927  2926.8   207.7 &lt;2e-16 ***
+## Residuals   98   1381    14.1                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code># Generate a boxplot to visualize the data
+library(ggplot2)
+
+ggplot(data, aes(x = Group, y = Directional_changes, fill = Group)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(
+    x = &quot;Group&quot;,
+    y = &quot;Number of directional changes&quot;
+  ) </code></pre>
+<p><img src="HW6_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+#### Using a for loops to adjust the parameters and explore how they
+might impact the results/analysis.How small can your sample size be
+before you detect a significant pattern (p &lt; 0.05)? How small can the
+differences between the groups be (the “effect size”) for you to still
+detect a significant pattern?</p>
+<pre class="r"><code>library(dplyr)</code></pre>
+<pre><code>## 
+## Adjuntando el paquete: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>#variables to explore
+effect_sizes &lt;- seq(1, 10, 0.5)  # Varying effect sizes
+sample_sizes &lt;- seq(5, 50, 5) # Varying sample sizes
+alpha &lt;- 0.05
+
+# data frame to store the results
+sample_size_results &lt;- data.frame()
+# creating the loop
+for (effect in effect_sizes) {
+  for (n in sample_sizes) {
+    group_boats &lt;- rnorm(n, mean = mean_boats, sd = sqrt(var_boats))
+    group_no_boats &lt;- rnorm(n, mean = mean_no_boats + effect, sd = sqrt(var_no_boats))
+    t_test &lt;- t.test(group_boats, group_no_boats)
+    p_value &lt;- t_test$p.value
+    # storing the results
+    sample_size_results &lt;- rbind(sample_size_results, 
+                     data.frame(Effect_Size = effect, 
+                                Sample_Size = n, 
+                                P_Value = p_value, 
+                                Significant = (p_value &lt; alpha)))
+  }
+}
+
+# View the first few rows of results
+print(head(sample_size_results))</code></pre>
+<pre><code>##   Effect_Size Sample_Size      P_Value Significant
+## 1           1           5 5.119420e-03        TRUE
+## 2           1          10 2.046770e-04        TRUE
+## 3           1          15 1.670127e-07        TRUE
+## 4           1          20 3.299073e-10        TRUE
+## 5           1          25 4.654102e-12        TRUE
+## 6           1          30 1.809820e-16        TRUE</code></pre>
+<pre class="r"><code># filtering the data frame for significant results with small sample sizes
+sample_size_results %&gt;% filter(Significant == TRUE &amp; Sample_Size &lt;= 5)</code></pre>
+<pre><code>##   Effect_Size Sample_Size      P_Value Significant
+## 1         1.0           5 0.0051194196        TRUE
+## 2         1.5           5 0.0342455382        TRUE
+## 3         2.0           5 0.0001913736        TRUE
+## 4         2.5           5 0.0234802309        TRUE
+## 5         4.0           5 0.0023766565        TRUE
+## 6         5.0           5 0.0158632797        TRUE
+## 7         5.5           5 0.0062711853        TRUE
+## 8         6.0           5 0.0054363660        TRUE</code></pre>
+</div>
+<div
+id="the-table-above-shows-that-the-minimum-sample-size-to-see-significant-differences-between-groups-is-5-and-a-differences-of-1-between-means-is-enough-to-still-see-a-difference."
+class="section level5">
+<h5>The table above shows that the minimum sample size to see
+significant differences between groups is 5, and a differences of 1
+between means is enough to still see a difference.</h5>
 </div>
 </div>
 
