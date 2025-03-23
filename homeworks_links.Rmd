@@ -26,5 +26,8 @@ Homework 6  [Fake data set](HW6.html)
 Homework 7  [dplyr package](HW7.html) 
 
 
+Homework 8 [Data Distributions](HW8.html)
+
+
 
 
