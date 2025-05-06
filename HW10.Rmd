@@ -60,7 +60,7 @@ longbeach <- animalshelter::longbeach |>
 #checking the variables
 str(longbeach)
 ```
-####1.Waffle plot to see the proportions of animal type in the shalter 
+#### 1.Waffle plot to see the proportions of animal type in the shalter 
 ```{r, eval=TRUE,echo=TRUE}
 # Prepare data (Example: Count property types)
 waffle_data <- longbeach %>%
@@ -72,7 +72,7 @@ ggplot(waffle_data, aes(fill=animal_type, values=proportion)) +
   geom_waffle() +
   theme_void()
 ```
-####2. Pie chart about the sex of the animals
+#### 2.Pie chart about the sex of the animals
 ```{r, eval=TRUE,echo=TRUE}
 pie_data<-longbeach %>%
   count(sex)%>%
@@ -90,7 +90,7 @@ ggplot(pie_data, aes(x = "", y = proportion, fill = sex)) +
   coord_polar(theta = "y") + 
   theme_void()
 ```
-####3. Treemap with information about the reason for animal intake such as stray capture, wildlife captures, adopted but returned, owner surrendered etc.
+#### 3.Treemap with information about the reason for animal intake such as stray capture, wildlife captures, adopted but returned, owner surrendered etc.
 ```{r, eval=TRUE,echo=TRUE}
 tree_data<-longbeach %>%
   count(intake_type)%>%
@@ -100,7 +100,7 @@ tree_data<-longbeach %>%
 ggplot(tree_data, aes(area = n, fill =intake_type)) +
   geom_treemap()
 ```
-####4. Lolipop plot about Outcome associated with animal - adopted, died, euthanized etc.
+#### 4.Lolipop plot about Outcome associated with animal - adopted, died, euthanized etc.
 ```{r, eval=TRUE,echo=TRUE}
 loli_data<-longbeach %>%
   count(outcome_type)
