@@ -10,9 +10,9 @@
 
 
 
-<meta name="date" content="2025-02-19" />
+<meta name="date" content="2025-03-26" />
 
-<title>HW6</title>
+<title>HW9</title>
 
 <script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -264,136 +264,38 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">HW6</h1>
-<h4 class="date">2025-02-19</h4>
+<h1 class="title toc-ignore">HW9</h1>
+<h4 class="date">2025-03-26</h4>
 
 </div>
 
 
-<div id="creating-fake-data-sets-to-explore-hypotheses"
-class="section level4">
-<h4>Creating Fake Data Sets To Explore Hypotheses</h4>
-<div
-id="im-creating-a-fake-data-set-on-the-effects-of-dolphin-watching-activities-on-dolphin-behaviour.-this-can-be-done-by-quantifying-the-occurrence-of-avoidance-responses-one-of-which-is-a-change-in-the-dolphins-swimming-direction.-in-this-homework-i-will-test-the-occurrence-of-directional-changes-in-two-conditions-no-tourist-boats-present-control-and-with-tourist-boats-present.-based-on-this-i-hypothesise-that-dolphins-will-show-a-greater-number-of-directional-changes-in-the-presence-of-tourist-boats."
-class="section level5">
-<h5>I’m creating a fake data set on the effects of dolphin watching
-activities on dolphin behaviour. This can be done by quantifying the
-occurrence of avoidance responses, one of which is a change in the
-dolphin’s swimming direction. In this homework I will test the
-occurrence of directional changes in two conditions: no tourist boats
-present (control) and with tourist boats present. Based on this, I
-hypothesise that dolphins will show a greater number of directional
-changes in the presence of tourist boats.</h5>
-<pre class="r"><code># Specify parameters
-n_no_boats &lt;- 50  # Sample size for the group without boats (number of dolphins)
-mean_no_boats &lt;- 9  # Mean of occurrences of directional changes in the group without boats
-var_no_boats &lt;- 10   # variance for the group without boats
-
-n_boats &lt;- 50  # Sample size for the group with boats
-mean_boats &lt;- 20  # Mean of occurrences of directional changes in the group with boats
-var_boats &lt;- 15  # variance for the group with boats
-
-# Generate random data
-No_boats &lt;- round(rnorm(n_no_boats, mean = mean_no_boats, sd = sqrt(var_no_boats)),0)
-boats &lt;- round(rnorm(n_boats, mean = mean_boats, sd = sqrt(var_boats)),0)
-
-# Combine data into a data frame
-data &lt;- data.frame(
-  Directional_changes = c(No_boats, boats),
-  Group = rep(c(&quot;No_boats&quot;, &quot;boats&quot;), each = n_no_boats)
-)
-head(data)</code></pre>
-<pre><code>##   Directional_changes    Group
-## 1                   5 No_boats
-## 2                  14 No_boats
-## 3                   5 No_boats
-## 4                   9 No_boats
-## 5                  16 No_boats
-## 6                  12 No_boats</code></pre>
-<pre class="r"><code>str(data)</code></pre>
-<pre><code>## &#39;data.frame&#39;:    100 obs. of  2 variables:
-##  $ Directional_changes: num  5 14 5 9 16 12 8 6 11 9 ...
-##  $ Group              : chr  &quot;No_boats&quot; &quot;No_boats&quot; &quot;No_boats&quot; &quot;No_boats&quot; ...</code></pre>
+<div id="r-markdown" class="section level2">
+<h2>R Markdown</h2>
+<p>This is an R Markdown document. Markdown is a simple formatting
+syntax for authoring HTML, PDF, and MS Word documents. For more details
+on using R Markdown see <a href="http://rmarkdown.rstudio.com"
+class="uri">http://rmarkdown.rstudio.com</a>.</p>
+<p>When you click the <strong>Knit</strong> button a document will be
+generated that includes both content as well as the output of any
+embedded R code chunks within the document. You can embed an R code
+chunk like this:</p>
+<pre class="r"><code>summary(cars)</code></pre>
+<pre><code>##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00</code></pre>
 </div>
-<div id="analyzing-the-data" class="section level5">
-<h5>Analyzing the data</h5>
-<pre class="r"><code>library(ggplot2)
-#ANOVA analysis
-anova_result &lt;- aov(Directional_changes ~ Group, data = data)
-summary(anova_result)</code></pre>
-<pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)    
-## Group        1   2927  2926.8   207.7 &lt;2e-16 ***
-## Residuals   98   1381    14.1                   
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<pre class="r"><code># Generate a boxplot to visualize the data
-library(ggplot2)
-
-ggplot(data, aes(x = Group, y = Directional_changes, fill = Group)) +
-  geom_boxplot() +
-  theme_minimal() +
-  labs(
-    x = &quot;Group&quot;,
-    y = &quot;Number of directional changes&quot;
-  ) </code></pre>
-<p><img src="HW6_files/figure-html/unnamed-chunk-2-1.png" width="672" />
-##### Using a for loops to adjust the parameters and explore how they
-might impact the results/analysis.How small can your sample size be
-before you detect a significant pattern (p &lt; 0.05)? How small can the
-differences between the groups be (the “effect size”) for you to still
-detect a significant pattern?</p>
-<pre class="r"><code>library(dplyr)
-#variables to explore
-effect_sizes &lt;- seq(1, 10, 0.5)  # Varying effect sizes
-sample_sizes &lt;- seq(5, 50, 5) # Varying sample sizes
-alpha &lt;- 0.05
-
-# data frame to store the results
-sample_size_results &lt;- data.frame()
-# creating the loop
-for (effect in effect_sizes) {
-  for (n in sample_sizes) {
-    group_boats &lt;- rnorm(n, mean = mean_boats, sd = sqrt(var_boats))
-    group_no_boats &lt;- rnorm(n, mean = mean_no_boats + effect, sd = sqrt(var_no_boats))
-    t_test &lt;- t.test(group_boats, group_no_boats)
-    p_value &lt;- t_test$p.value
-    # storing the results
-    sample_size_results &lt;- rbind(sample_size_results, 
-                     data.frame(Effect_Size = effect, 
-                                Sample_Size = n, 
-                                P_Value = p_value, 
-                                Significant = (p_value &lt; alpha)))
-  }
-}
-
-# View the first few rows of results
-print(head(sample_size_results))</code></pre>
-<pre><code>##   Effect_Size Sample_Size      P_Value Significant
-## 1           1           5 5.119420e-03        TRUE
-## 2           1          10 2.046770e-04        TRUE
-## 3           1          15 1.670127e-07        TRUE
-## 4           1          20 3.299073e-10        TRUE
-## 5           1          25 4.654102e-12        TRUE
-## 6           1          30 1.809820e-16        TRUE</code></pre>
-<pre class="r"><code># filtering the data frame for significant results with small sample sizes
-sample_size_results %&gt;% filter(Significant == TRUE &amp; Sample_Size &lt;= 5)</code></pre>
-<pre><code>##   Effect_Size Sample_Size      P_Value Significant
-## 1         1.0           5 0.0051194196        TRUE
-## 2         1.5           5 0.0342455382        TRUE
-## 3         2.0           5 0.0001913736        TRUE
-## 4         2.5           5 0.0234802309        TRUE
-## 5         4.0           5 0.0023766565        TRUE
-## 6         5.0           5 0.0158632797        TRUE
-## 7         5.5           5 0.0062711853        TRUE
-## 8         6.0           5 0.0054363660        TRUE</code></pre>
-</div>
-<div
-id="the-table-above-shows-that-the-minimum-sample-size-to-see-significant-differences-between-groups-is-5-and-a-differences-of-1-between-means-is-enough-to-still-see-a-difference."
-class="section level5">
-<h5>The table above shows that the minimum sample size to see
-significant differences between groups is 5, and a differences of 1
-between means is enough to still see a difference.</h5>
-</div>
+<div id="including-plots" class="section level2">
+<h2>Including Plots</h2>
+<p>You can also embed plots, for example:</p>
+<p><img src="HW9_files/figure-html/pressure-1.png" width="672" /></p>
+<p>Note that the <code>echo = FALSE</code> parameter was added to the
+code chunk to prevent printing of the R code that generated the
+plot.</p>
 </div>
 
 

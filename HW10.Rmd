@@ -72,7 +72,7 @@ ggplot(waffle_data, aes(fill=animal_type, values=proportion)) +
   geom_waffle() +
   theme_void()
 ```
-####2.Pie chart about the sex of the animals
+#### 2.Pie chart about the sex of the animals
 ```{r, eval=TRUE,echo=TRUE}
 pie_data<-longbeach %>%
   count(sex)%>%
