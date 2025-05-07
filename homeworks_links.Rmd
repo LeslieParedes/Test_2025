@@ -29,7 +29,7 @@ Homework 7  [dplyr package](HW7.html)
 Homework 8 [Data Distributions](HW8.html)
 
 
-Homework 9 []
+Homework 9 [Strategic coding](Homework 9.zip)
 
 
 Homework 10 [Advanced ggplotting](HW10.html)
